@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app="freshTomatoes">
+    <head>
+        <title>FreshTomatoes - Movie Reviews</title>
+        <link rel="stylesheet" href="bootstrap.min.css" />
+        <script type="text/javascript" src="angular.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </head>
+    <body ng-controller="TomatoController as tomato">
+        <h1>Fresh Tomatoes are <strong>BEST</strong> tomatoes!</h1>
+        
+        <!-- search functionality -->
+        <div>
+            <input type="text" ng-model="tomato.searchText" placeholder="Search" />
+            {{tomato.searchText}}
+        </div>
+        
+        <ul>
+            <li ng-repeat="movie in tomato.movies | filter:tomato.searchText | orderBy:'movie_name'">
+                <h3>{{movie.movie_name}}</h3>
+                <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)"/>
+                <div ng-show="movie.show">
+                    <blockquote>{{movie.description}}</blockquote>
+                </div>
+            </li>
+        </ul>
+    </body>
+</html>
