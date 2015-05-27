@@ -7,8 +7,8 @@
         tomato.movies = [];
         tomato.filteredMovies = tomato.movies;
         tomato.currentMovie = {};
-        //var movieUrl = 'http://private-05248-rottentomatoes.apiary-mock.com/';
-        var movieUrl = '/mock-movie-list.json';
+        var movieUrl = 'http://private-05248-rottentomatoes.apiary-mock.com/';
+        //var movieUrl = '/mock-movie-list.json';
         $http.get(movieUrl).success(function(data) {
            for (movieData in data.movies) {
              movieData.show = false;   
