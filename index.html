@@ -1,28 +1,56 @@
 <!doctype html>
 <html ng-app="freshTomatoes">
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <title>FreshTomatoes - Movie Reviews</title>
-        <link rel="stylesheet" href="bootstrap.min.css" />
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <!-- ********** Loading Bootstrap *************** -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+        <!-- ******************************************** -->
+        <link rel="stylesheet" href="application.css" />
         <script type="text/javascript" src="angular.min.js"></script>
         <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="thumbnailHover.js"></script>
     </head>
     <body ng-controller="TomatoController as tomato">
-        <h1>Fresh Tomatoes are <strong>BEST</strong> tomatoes!</h1>
-        
-        <!-- search functionality -->
-        <div>
-            <input type="text" ng-model="tomato.searchText" placeholder="Search" />
-            {{tomato.searchText}}
-        </div>
-        
-        <ul>
-            <li ng-repeat="movie in tomato.movies | filter:{description:tomato.searchText} | orderBy:'movie_name'">
-                <h3>{{movie.movie_name}}</h3>
-                <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)"/>
-                <div ng-show="movie.show">
-                    <blockquote>{{movie.description}}</blockquote>
+        <div class="container-fluid">
+            
+            
+            <!-- search functionality -->
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" ng-model="tomato.searchText" placeholder="Search" title="This only searches movie_name field" ng-keyUp="tomato.search(tomato.searchText,false)" />
+                    <button title="Clicking will search movies by description." ng-click="tomato.search(tomato.searchText,true)">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
                 </div>
-            </li>
-        </ul>
+            </div>
+
+            <div class="row" ng-repeat="movie in tomato.filteredMovies | orderBy:'movie_name'">
+                <div class="col-lg-12">
+                    {{movie.movie_name}}
+                </div>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)" title="{{movie.description.length > 40 ? (movie.description | limitTo:40) : movie.description}}"/>
+                    </div>
+                </div>
+                <div class="col-md-3" ng-show="movie.show">
+                    {{movie.description}}
+                </div>
+            </div>
+        </div>
     </body>
 </html>
