@@ -33,19 +33,7 @@
             
             <tomato-movie-search></tomato-movie-search>
             
-            <!-- orderBy funtionality -->
-            <div class="panel">
-                <div class="row" style="background-color: yellow;">
-                    <div class="col-md-1">
-                        <select ng-model="tomato.sortOrder" ng-init="tomato.sortOrder='+movie_name'">
-                            <option value="+movie_name">Name (A-Z)</option>
-                            <option value="-movie_name">Name (Z-A)</option>
-                            <option value="-rating">Rating (Hi-Lo)</option>
-                            <option value="+rating">Rating (Lo-Hi)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <tomato-movie-sorting></tomato-movie-sorting>
 
             <tomato-movie-listing></tomato-movie-listing>
         </div>

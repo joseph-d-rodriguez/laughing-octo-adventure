@@ -46,4 +46,12 @@
          templateUrl: 'tomato-movie-listing.html'
        };
     });
+    
+    app.directive('tomatoMovieSorting', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'tomato-movie-sorting.html'
+        };
+    });
+    
 })();
