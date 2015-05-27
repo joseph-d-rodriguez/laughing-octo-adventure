@@ -27,6 +27,9 @@
     <body ng-controller="TomatoController as tomato">
         <div class="container-fluid">
             
+            <div class="page-header">
+                <h1>Fresh Tomatoes - Movie Reviews</h1>
+            </div>
             
             <!-- search functionality -->
             <div class="row">
@@ -37,14 +40,34 @@
                     </button>
                 </div>
             </div>
+            
+            <!-- orderBy funtionality -->
+            <!--
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-1">
+                        Order By:
+                    </div>
+                    <div class="col-md-1">
+                        <a>Name</a>
+                    </div>
+                    <div class="col-md-1">
+                        <a>Rating</a>
+                    </div>
+                </div>
+            </div>
+            -->
 
             <div class="row" ng-repeat="movie in tomato.filteredMovies | orderBy:'movie_name'">
                 <div class="col-lg-12">
-                    {{movie.movie_name}}
+                    <h3>{{movie.movie_name}}</h3>
                 </div>
                 <div class="col-md-2">
+                    <div>
+                        <i class="glyphicon glyphicon-star-empty" >{{movie.rating}}</i>
+                    </div>
                     <div class="thumbnail">
-                        <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)" title="{{movie.description.length > 40 ? (movie.description | limitTo:40) : movie.description}}"/>
+                        <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)" title="{{movie.description.length > 40 ? ((movie.description | limitTo:40) + '...click image for more') : movie.description}}"/>
                     </div>
                 </div>
                 <div class="col-md-3" ng-show="movie.show">
