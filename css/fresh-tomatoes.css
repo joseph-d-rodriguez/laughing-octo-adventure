@@ -1,0 +1,12 @@
+.tomato-body {
+    background: #DDDDDD;
+}
+
+.tomato-rating {
+    color: yellow;
+    font-weight: bold;
+}
+
+.tomato-description {
+    color: rgb(38,38,128);
+}

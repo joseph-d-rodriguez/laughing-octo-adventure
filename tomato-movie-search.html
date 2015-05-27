@@ -1,8 +1,8 @@
 <!-- search functionality -->
 <div class="row">
     <div class="col-md-12">
-        <input type="text" ng-model="tomato.searchText" placeholder="Search" title="This only searches movie_name field" ng-keyUp="tomato.search(tomato.searchText,false)" />
-        <button title="Clicking will search movies by description." ng-click="tomato.search(tomato.searchText,true)">
+        <input type="text" ng-model="tomato.searchText" placeholder="Search" title="Search movies by Name." ng-keyUp="tomato.search(tomato.searchText,false)" />
+        <button title="Search movies by Name and Description." ng-click="tomato.search(tomato.searchText,true)">
             <i class="glyphicon glyphicon-search"></i>
         </button>
     </div>
