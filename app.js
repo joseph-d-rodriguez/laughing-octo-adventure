@@ -3,6 +3,7 @@
     
     app.controller('TomatoController', ['$http', '$filter', function($http, $filter) {
         var tomato = this;
+        tomato.sortOrder="movie_name";
         tomato.movies = [];
         tomato.filteredMovies = tomato.movies;
         tomato.currentMovie = {};
@@ -32,6 +33,17 @@
         };
     }]);
     
+    app.directive('tomatoMovieSearch', function() {
+       return {
+         restrict: 'E',
+         templateUrl: 'tomato-movie-search.html'
+       };
+    });
     
-    
+    app.directive('tomatoMovieListing', function() {
+       return {
+         restrict: 'E',
+         templateUrl: 'tomato-movie-listing.html'
+       };
+    });
 })();

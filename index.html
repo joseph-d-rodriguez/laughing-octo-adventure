@@ -31,49 +31,23 @@
                 <h1>Fresh Tomatoes - Movie Reviews</h1>
             </div>
             
-            <!-- search functionality -->
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="text" ng-model="tomato.searchText" placeholder="Search" title="This only searches movie_name field" ng-keyUp="tomato.search(tomato.searchText,false)" />
-                    <button title="Clicking will search movies by description." ng-click="tomato.search(tomato.searchText,true)">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
-            </div>
+            <tomato-movie-search></tomato-movie-search>
             
             <!-- orderBy funtionality -->
-            <!--
             <div class="panel">
-                <div class="row">
+                <div class="row" style="background-color: yellow;">
                     <div class="col-md-1">
-                        Order By:
-                    </div>
-                    <div class="col-md-1">
-                        <a>Name</a>
-                    </div>
-                    <div class="col-md-1">
-                        <a>Rating</a>
+                        <select ng-model="tomato.sortOrder" ng-init="tomato.sortOrder='+movie_name'">
+                            <option value="+movie_name">Name (A-Z)</option>
+                            <option value="-movie_name">Name (Z-A)</option>
+                            <option value="-rating">Rating (Hi-Lo)</option>
+                            <option value="+rating">Rating (Lo-Hi)</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            -->
 
-            <div class="row" ng-repeat="movie in tomato.filteredMovies | orderBy:'movie_name'">
-                <div class="col-lg-12">
-                    <h3>{{movie.movie_name}}</h3>
-                </div>
-                <div class="col-md-2">
-                    <div>
-                        <i class="glyphicon glyphicon-star-empty" >{{movie.rating}}</i>
-                    </div>
-                    <div class="thumbnail">
-                        <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)" title="{{movie.description.length > 40 ? ((movie.description | limitTo:40) + '...click image for more') : movie.description}}"/>
-                    </div>
-                </div>
-                <div class="col-md-3" ng-show="movie.show">
-                    {{movie.description}}
-                </div>
-            </div>
+            <tomato-movie-listing></tomato-movie-listing>
         </div>
     </body>
 </html>

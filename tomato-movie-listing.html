@@ -1,0 +1,17 @@
+<!-- movie listing functionality -->
+<div class="row" ng-repeat="movie in tomato.filteredMovies | orderBy:tomato.sortOrder">
+    <div class="col-lg-12">
+        <h3>{{movie.movie_name}}</h3>
+    </div>
+    <div class="col-md-2">
+        <div>
+            <i class="glyphicon glyphicon-star-empty" >{{movie.rating}}</i>
+        </div>
+        <div class="thumbnail">
+            <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)" title="{{movie.description.length > 40 ? ((movie.description | limitTo:40) + '...click image for more') : movie.description}}"/>
+        </div>
+    </div>
+    <div class="col-md-3" ng-show="movie.show">
+        {{movie.description}}
+    </div>
+</div>
