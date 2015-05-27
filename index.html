@@ -16,7 +16,7 @@
         </div>
         
         <ul>
-            <li ng-repeat="movie in tomato.movies | filter:tomato.searchText | orderBy:'movie_name'">
+            <li ng-repeat="movie in tomato.movies | filter:{description:tomato.searchText} | orderBy:'movie_name'">
                 <h3>{{movie.movie_name}}</h3>
                 <img ng-src="{{movie.image_url}}" ng-click="tomato.movieClicked(movie)"/>
                 <div ng-show="movie.show">
