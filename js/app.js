@@ -1,21 +1,45 @@
 (function() {
-    var app = angular.module('freshTomatoes', []);
+    var app = angular.module('freshTomatoes', ['firebase']);
     
-    app.controller('TomatoController', ['$http', '$filter', function($http, $filter) {
+    app.controller('TomatoController', ['$http', '$filter', '$scope', '$firebaseObject', '$firebaseArray', 
+                    function($http, $filter, $scope, $firebaseObject, $firebaseArray) {
         var tomato = this;
         tomato.sortOrder="movie_name";
-        tomato.movies = [];
-        tomato.filteredMovies = tomato.movies;
-        tomato.currentMovie = {};
-        var movieUrl = 'http://private-05248-rottentomatoes.apiary-mock.com/';
-        //var movieUrl = '/local/json/mock-movie-list.json';
-        $http.get(movieUrl).success(function(data) {
-           for (movieData in data.movies) {
-             movieData.show = false;   
-           }
-           tomato.movies = data.movies;
-           tomato.filteredMovies = tomato.movies;
-        });
+        
+        tomato.firebaseRef = new Firebase("https://jrod-fresh-tomatoes.firebaseio.com/");
+        tomato.firebaseTomato = $firebaseObject(tomato.firebaseRef);
+        tomato.fileteredMovies = tomato.firebaseTomato.movies;
+        
+        tomato.showAddMovie = false;
+        tomato.clickAddMovie = function() {
+            tomato.showAddMovie = !tomato.showAddMovie;
+        };
+        tomato.addMovie = function() {
+            tomato.firebaseTomato.movies.push(
+                {
+                    movie_name: tomato.newMovieName, 
+                    description: tomato.newMovieDescription, 
+                    image_url: tomato.newMovieImage, 
+                    rating: tomato.newMovieRating
+                }
+            );
+            tomato.firebaseTomato.$save();
+            // clear fields
+            tomato.newMovieName = '';
+            tomato.newMovieDescription = '';
+            tomato.newMovieImage = '';
+            tomato.newMovieRating = '';
+        };
+                        
+        tomato.removie = function(aMovieName) {
+            for (index=0; index<tomato.firebaseTomato.movies.length; index++) {
+                if (aMovieName === tomato.firebaseTomato.movies[index].movie_name) {
+                    tomato.firebaseTomato.movies.splice(index, 1);
+                    break;
+                }
+            }
+            tomato.firebaseTomato.$save();
+        }
         
         tomato.movieClicked = function(aMovie) {
             aMovie.show = !aMovie.show;
@@ -29,7 +53,7 @@
                 // Else just search movie_name
                 searchCriteria.movie_name = searchText;
             }
-            tomato.filteredMovies = $filter('filter')(tomato.movies, searchCriteria);
+            tomato.filteredMovies = $filter('filter')(tomato.firebaseTomato.movies, searchCriteria);
         };
     }]);
     
@@ -51,6 +75,13 @@
         return {
             restrict: 'E',
             templateUrl: 'tomato-movie-sorting.html'
+        };
+    });
+    
+    app.directive('tomatoMovieAdding', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'tomato-movie-adding.html'
         };
     });
     

@@ -10,3 +10,7 @@
 .tomato-description {
     color: rgb(38,38,128);
 }
+
+.tomato-remove {
+    color: red;
+}
