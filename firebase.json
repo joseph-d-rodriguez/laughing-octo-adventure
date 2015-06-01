@@ -1,0 +1,9 @@
+{
+  "firebase": "jrod-fresh-tomatoes",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
