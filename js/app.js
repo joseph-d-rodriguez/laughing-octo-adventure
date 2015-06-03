@@ -48,6 +48,7 @@
             tomato.newMovieDescription = '';
             tomato.newMovieImage = '';
             tomato.newMovieRating = '';
+            tomato.search(tomato.searchText, false);
         };
                         
         tomato.removie = function(aMovieName) {
@@ -58,11 +59,14 @@
                 }
             }
             tomato.firebaseTomato.$save();
+            tomato.search(tomato.searchText, false);
         }
         
         tomato.movieClicked = function(aMovie) {
             aMovie.show = !aMovie.show;
         };
+                        
+        
         
         tomato.search = function(searchText, searchAll) {
             var searchCriteria = {};
