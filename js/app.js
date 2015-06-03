@@ -10,24 +10,8 @@
         tomato.firebaseRef = new Firebase("https://jrod-fresh-tomatoes.firebaseio.com/");
         tomato.firebaseTomato = $firebaseObject(tomato.firebaseRef);
         tomato.firebaseTomato.$loaded(function() {
-            tomato.filteredMovies = tomato.firebaseTomato.movies;
+            tomato.search(tomato.searchText, false);
         });
-        /*
-        tomato.firebaseRef.on('value', function(snapshot) {
-            console.log('firebase value event [A]: ' + snapshot.A.toString());
-            var eventMovies = JSON.parse(snapshot.A.toString()).movies;
-            var isGood = true;
-            var index = 0;
-            while (isGood) {
-                if (eventMovies[index]) {
-                    tomato.filteredMovies.push(eventMovies[index]);
-                } else {
-                    isGood = false;
-                }
-            }
-            
-        });
-        */
         
         tomato.showAddMovie = false;
         tomato.clickAddMovie = function() {
