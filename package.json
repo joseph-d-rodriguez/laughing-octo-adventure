@@ -1,0 +1,14 @@
+{
+  "name": "laughing-octo-adventure",
+  "subdomain": "undefined-laughing-octo-adventure",
+  "scripts": {
+    "start": "nodeServer.js"
+  },
+  "version": "0.0.0-1",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "express": "4.12.x"
+  }
+}
